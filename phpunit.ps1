@@ -136,7 +136,7 @@ begin {
 
         Write-Host $(" Binary: $global:bin `n Config: $global:config`n Path:   $path`n") -ForegroundColor DarkGray
 
-        # Start-Process "$global:bin" -ArgumentList "$global:config $path" -NoNewWindow -Wait
+        Start-Process "$global:bin" -ArgumentList "$global:config $path" -NoNewWindow -Wait
 
         return
     }
