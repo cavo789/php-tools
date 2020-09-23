@@ -14,7 +14,8 @@
 param (
     # Show the help screen
     [switch] $help = $false,
-    [parameter(Position=0, Mandatory=$false)][String]$path="tests"
+    [parameter(Position=0, Mandatory=$false)][String]$path="tests",
+    [parameter(Position=1, Mandatory=$false)][String]$filter=""
 )
 begin {
 
@@ -39,6 +40,9 @@ begin {
     # Path to the configuration file if there is one (f.i phpunit.xml)
     $global:config = ""
 
+    # Full name of this script
+    $global:me = ""
+
     <#
     .SYNOPSIS
         Display the help screen
@@ -59,6 +63,9 @@ begin {
 
         Write-Host $(
             " <path>          Name of a folder (like 'tests\core') or a file (like 'tests\api\check.php'); default is 'tests'`n"
+        )
+        Write-Host $(
+            " <filter>        Optional, if mentionned, name of f.i. a function to execute. Same as the --filter option of phpunit.`n"
         )
 
         return
@@ -131,12 +138,21 @@ begin {
             " ===============`n"
         )
 
+        Write-Host " Running $($global:me)`n" -ForegroundColor Cyan
+
         getBinary
         getConfiguration
 
-        Write-Host $(" Binary: $global:bin `n Config: $global:config`n Path:   $path`n") -ForegroundColor DarkGray
+        Write-Host $(" Binary: $global:bin `n Config: $global:config`n Path:   $path") -ForegroundColor DarkGray
 
-        Start-Process "$global:bin" -ArgumentList "$global:config $path" -NoNewWindow -Wait
+        if (-not ([string]::IsNullOrEmpty($filter))) {
+            $filter = "--filter '$filter'"
+            Write-Host $(" Filter: $filter`n") -ForegroundColor DarkGray
+        }
+
+        Write-Host $(" Start:  $global:bin $global:config $path $filter`n") -ForegroundColor Yellow
+
+        Start-Process "$global:bin" -ArgumentList "$global:config $path $filter" -NoNewWindow -Wait
 
         return
     }
@@ -147,6 +163,9 @@ begin {
         exit
     }
 
+    $global:me = "$($PSScriptRoot)\$($MyInvocation.MyCommand.Name)"
+
     doJob
+
     #endregion Entry point
 }
