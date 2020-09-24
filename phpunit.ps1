@@ -65,7 +65,7 @@ begin {
             " <path>          Name of a folder (like 'tests\core') or a file (like 'tests\api\check.php'); default is 'tests'`n"
         )
         Write-Host $(
-            " <filter>        Optional, if mentionned, name of f.i. a function to execute. Same as the --filter option of phpunit.`n"
+            " <filter>        Optional, if mentioned, name of f.i. a function to execute. Same as the --filter option of phpunit.`n"
         )
 
         return
