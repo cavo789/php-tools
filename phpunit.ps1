@@ -150,9 +150,13 @@ begin {
             Write-Host $(" Filter: $filter`n") -ForegroundColor DarkGray
         }
 
-        Write-Host $(" Start:  $global:bin $global:config $path $filter`n") -ForegroundColor Yellow
+        Write-Host $("`n Start:  $global:bin $global:config $path $filter`n") -ForegroundColor Yellow
 
+        $startTime = (Get-Date)
         Start-Process "$global:bin" -ArgumentList "$global:config $path $filter" -NoNewWindow -Wait
+        $endTime = (Get-Date)
+
+        Write-Host $("`n Unit tests duration: {0:mm} min {0:ss} sec" -f ($endTime-$startTime)) -ForegroundColor Green
 
         return
     }
