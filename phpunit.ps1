@@ -54,7 +54,7 @@ begin {
         Write-Host " $TOOL - utility" -ForegroundColor Green
 
         Write-Host $(
-            "`n Usage: php-unit [-help] <path>`n"
+            "`n Usage: $TOOL [-help] <path>`n"
         ) -ForegroundColor Cyan
 
         Write-Host $(
@@ -67,6 +67,16 @@ begin {
         Write-Host $(
             " <filter>        Optional, if mentioned, name of f.i. a function to execute. Same as the --filter option of phpunit.`n"
         )
+        Write-Host $("Some examples`n-------------`n")
+        Write-Host $("phpunit                               ") -ForegroundColor Cyan -NoNewline
+        Write-Host $("run every tests present in the tests sub-folder (no folder was mentioned so, " +
+            "by default, folder name is tests),")
+        Write-Host $("phpunit tests\api                     ") -ForegroundColor Cyan -NoNewline
+        Write-Host $("run every tests in the tests\api folder,")
+        Write-Host $("phpunit tests\api testNameOfAFunction ") -ForegroundColor Cyan -NoNewline
+        Write-Host $("browse any tests in the tests\api folder and only run the testNameOfAFunction function,")
+        Write-Host $("phpunit tests\webservices\consume.php ") -ForegroundColor Cyan -NoNewline
+        Write-Host $("run any tests present in the tests\webservices\consume.php file.")
 
         return
     }

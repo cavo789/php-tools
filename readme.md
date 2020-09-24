@@ -34,7 +34,7 @@ phpunit -help
 ```txt
  phpunit - utility
 
- Usage: php-unit [-help] <path>
+ Usage: phpunit [-help] <path>
 
  -help           Show this screen
 
@@ -47,7 +47,7 @@ You just need (but not forced) to tell which folder / file has to be fired. For 
 
 #### Some command line examples
 
-* `phpunit`: run every tests presents in the `tests` sub-folder (no folder was mentioned so, by default, folder name is `tests`),
+* `phpunit`: run every tests present in the `tests` sub-folder (no folder was mentioned so, by default, folder name is `tests`),
 * `phpunit tests\api`: run every tests in the `tests\api` folder,
 * `phpunit tests\api testNameOfAFunction`: browse any tests in the `tests\api` folder and only run the `testNameOfAFunction` function,
 * `phpunit tests\webservices\consume.php`: run any tests present in the `tests\webservices\consume.php` file.
